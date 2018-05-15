@@ -44,7 +44,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Value("${spring.profiles.active}")
     private String env;//当前激活的配置文件
 
-    //使用阿里 FastJson 作为JSON MessageConverter
+    /**
+     * 使用 FastJson 作为 JSON MessageConverter
+     * @param converters
+     */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
@@ -58,7 +61,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
 
-    //统一异常处理
+    /**
+     * 统一异常处理
+     * @param exceptionResolvers
+     */
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
         exceptionResolvers.add(new HandlerExceptionResolver() {
@@ -93,13 +99,19 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         });
     }
 
-    //解决跨域问题
+    /**
+     * 跨域配置
+     * @param registry
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //registry.addMapping("/**");
     }
 
-    //添加拦截器
+    /**
+     * 添加拦截器
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //接口签名认证拦截器，该签名认证比较简单，实际项目中可以使用Json Web Token或其他更好的方式替代。
